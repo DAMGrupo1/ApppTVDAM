@@ -1,0 +1,53 @@
+$.ajax({
+	  type: "GET",
+	  crossDomain: true,
+	  async: true,
+	  dataType: "json",
+	  url: API+"/discover/now_playing?api_key="+api_key,
+	  success: function(data){
+	  	alert('success');
+	  	//$("#movies").append('<div id="r0" style="display:none;">');
+	  	$("#movies").append('<div id="t0"><h1 class=titulo> PELICULAS ACTUALES </h1></div>');
+	  	for (var i = 0; i < 6; i++) {
+	  		if(i == 0) $("#movies").append('<div  id="d0"  class="row">');
+	  		if(i == 5) $("#movies").append('</div>');
+	  		$("#movies").append('<div class="col-xs-2" href="'+data.results[i].id+'"><img src="'+base_url+'w342'+data.results[i].poster_path+'"/></div>');
+	  		arr[i]=data.results[i].id;
+	  	}
+  		$("#movies").append('<div id="dd0" class="row"></div>');
+	  	//$("#movies").append('</div>');
+	  	//$('#movies div.col-xs-2').keynav();
+	  	alert($("#movies"));
+	  },
+	  error: function(){
+	  	alert('error');
+	  }
+	};
+	
+	
+	
+	
+	$.ajax({
+		  type: "GET",
+		  crossDomain: true,
+		  async: true,
+		  dataType: "json",
+		  url: API+"/movies/popular?api_key="+api_key,
+		  success: function(data){
+		  	alert('success');
+		  	$("#movies").append('<div id="t1"><h1 class=titulo> PELICULAS POPULARES </div></div>');
+		  	
+		  	for (var i = 0; i < 6; i++) {
+		  		if(i == 0) $("#movies").append('<div  id="d1" class="row">');
+		  		if(i == 5) $("#movies").append('</div>');
+		  		
+		  		$("#movies").append('<div class="col-xs-2" href="'+data.results[i].id+'"><img src="'+base_url+'w342'+data.results[i].poster_path+'"/></div>');
+		  	}	
+			//$('#movies div.col-xs-2').keynav();
+
+	  		$("#movies").append('<div id="dd1" class="row"></div>');
+		  },
+		  error: function(){
+		  	alert('error');
+		  }
+		});
